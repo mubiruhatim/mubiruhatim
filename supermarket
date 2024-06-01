@@ -1,0 +1,193 @@
+import datetime
+
+basket = []  # Initialize an empty list to store items in the basket
+discount_threshold = 100000  # Threshold for applying discount
+discount_rate = 0.05  # Discount rate
+receipt_number =0
+while True:
+    # Display the menu options
+    print("\nEasy buy shopping Menu")
+    print("1. Add item")
+    print("2. Remove item")
+    print("3. View basket")
+    print("4. Exit program")
+
+    # Prompt the user to enter an option
+    option = input("Enter an option: ")
+
+    # Option 1: Add item
+    if option == '1':
+        name = input("Enter item name: ")
+        quantity = int(input("Enter quantity: "))
+        price = float(input("Enter price: "))
+        # Check if the item already exists in the basket
+        for item in basket:
+            if item['name'] == name:
+                item['quantity'] += quantity  # Increase quantity if item exists
+                break
+        else:
+            basket.append({'name': name, 'quantity': quantity, 'price': price})  # Add new item to the basket
+
+    # Option 2: Remove item
+    elif option == '2':
+        name = input("Enter item name to remove: ")
+        # Check if the item exists in the basket
+        for item in basket:
+            if item['name'] == name:
+                basket.remove(item)  # Remove item from the basket
+                break
+        else:
+            print("Item not found in the basket.")
+
+    # Option 3: View basket
+    elif option == '3':
+        if not basket:
+            print("Basket is empty.")
+        else:
+            print("-EASY BUY SHOPPING LIST-")
+            print("ITEM\tQTY\tPRICE\tAMOUNT")
+            total_bill = 0
+            # Display items in the basket
+            for item in basket:
+                amount = item['quantity'] * item['price']
+                total_bill += amount
+                print(f"{item['name']}\t{item['quantity']}\t{item['price']:.2f}\t{amount:.2f}")  # Format prices to two decimal places
+            # Calculate total bill, discount, and net amount
+            discount = 0
+            if total_bill >= discount_threshold:
+                discount = discount_rate * total_bill
+            net_amount = total_bill - discount
+            print(f"TOTAL BILL: {total_bill:.2f}")
+            print(f"DISCOUNT: {discount:.2f}")
+            print(f"NET AMOUNT: {net_amount:.2f}")
+
+            # Option to generate receipt
+            print("\nGenerate Receipt? (y/n)")
+            generate_receipt = input().lower()
+            if generate_receipt == 'y':
+                # Get cash paid by customer
+                cash_paid = float(input("Enter cash paid by customer: "))
+
+                # Generate receipt in a formatted way
+                receipt_number +=1
+                now = datetime.datetime.now()  # Get current date and time
+                receipt = f"""
+                --- EASY BUY RECEIPT ---
+                HATIM INVESTMENTS UG LIMITED
+                
+                LOCATION : NAMASUBA UG
+                
+                CONTACT : 0751439441/0778065582
+                
+                EMAIL : mubiruhatim33@gmail.com
+                
+                receipt no: {receipt_number} 
+                     
+                Date: {now.strftime('%Y-%m-%d %H:%M:%S')}
+                  
+                ITEM   QUANTITY   PRICE   AMOUNT
+                """
+                for item in basket:
+                    amount = item['quantity'] * item['price']
+                  
+                    receipt += f"{item['name']}\t {item['quantity']}\t{item['price']}\t{amount:.2f}\n\t\t"
+                receipt += f"""
+                Total Bill: {total_bill:.2f}
+                Discount: {discount:.2f}
+                Net Amount: {net_amount:.2f}
+
+                Cash Paid: {cash_paid:.2f}
+                Balance to Return: {(cash_paid - net_amount):.2f}
+
+                --- Thank you for shopping at Easy Buy! ---
+                """
+
+                print(receipt)
+
+    # Option 4: Exit program
+    elif option == '4':
+        print("Exiting program...")
+        break
+
+    else:
+        print("Invalid option. Please try again.")
+# Global variables
+basket = []  # Initialize an empty list to store items in the basket
+discount_threshold = 10000  # Threshold for applying discount
+discount_rate = 0.05  # Discount rate
+
+# Main loop for the program
+    # Display the menu option  
+print("\n\tHATIM INVESTMENTS")
+print("location: NAMASUBA UG OPP TOTAL 2")
+print("contact: 0751439441/0778065582")
+print("email: mubiruhatim33@gmail.com")
+while True:
+    print("1. Add item")
+    print("2. Remove item")
+    print("3. View basket")
+    print("4. Exit program")
+    
+    # Prompt the user to enter an option
+    option = input("Enter an option: ")
+
+    # Option 1: Add item
+    if option == '1':
+        name = input("Enter item name: ")
+        quantity = int(input("Enter quantity: "))
+        price = float(input("Enter price: "))
+        # Check if the item already exists in the basket
+        for item in basket:
+            if item['name'] == name:
+                item['quantity'] += quantity  # Increase quantity if item exists
+                break
+        else:
+            basket.append({'name': name, 'quantity': quantity, 'price': price})  # Add new item to the basket
+
+    # Option 2: Remove item
+    elif option == '2':
+        name = input("Enter item name to remove: ")
+        # Check if the item exists in the basket
+        for item in basket:
+            if item['name'] == name:
+                basket.remove(item)  # Remove item from the basket
+                break
+        else:
+            print("Item not found in the basket.")
+
+    # Option 3: View basket
+    elif option == '3':
+        if not basket:
+            print("Basket is empty.")
+        else:
+            print("\t-HATIM INVESTMENTS -\t")
+            print("ITEM\tQTY\tPRICE\tAMOUNT")
+            total_bill = 0
+            # Display items in the basket
+            for item in basket:
+                amount = item['quantity'] * item['price']
+                total_bill += amount
+                print(f"{item['name']}\t{item['quantity']}\t{item['price']}\t{amount}")
+            # Calculate total bill, discount, and net amount
+            discount = 0
+            if total_bill >= discount_threshold:
+                discount = discount_rate * total_bill
+            net_amount = total_bill - discount
+            print(f"\tTOTAL BILL: {total_bill}")
+            print(f"\tDISCOUNT: {discount}")
+            print(f"\tNET AMOUNT: {net_amount}")
+            cash_given = int(input("enter cash give : "))
+            change = cash_given - net_amount
+            print(f"CASH :{cash_given}")
+            print(f"CHANGE : {change}")
+
+    # Option 4: Exit program
+    elif option == '4':
+        print("Exiting program...")
+        
+        break  
+        # Exit the loop and end the program
+       
+
+    else:
+        print("Invalid option. Please try again.")
